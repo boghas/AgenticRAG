@@ -44,4 +44,4 @@ if doc_count > 0:
 
 vectorstore.add_documents(doc_splits)
 
-retriever = vectorstore.as_retriever()
+retriever = vectorstore.as_retriever(k=4)
