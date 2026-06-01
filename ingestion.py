@@ -35,12 +35,12 @@ embeddings = OpenAIEmbeddings(
 vectorstore = PineconeVectorStore(index_name=os.environ["INDEX_NAME"], embedding=embeddings)
 
 # Clear the index if it's already populated to avoid duplicate documents
-doc_count = vectorstore.index.describe_index_stats()["total_vector_count"]
+# doc_count = vectorstore.index.describe_index_stats()["total_vector_count"]
 
-if doc_count > 0:
-    print(f"Found {doc_count} documents")
-    print("Clearing index")
-    vectorstore.delete(delete_all=True)
+# if doc_count > 0:
+#     print(f"Found {doc_count} documents")
+#     print("Clearing index")
+#     vectorstore.delete(delete_all=True)
 
 vectorstore.add_documents(doc_splits)
 
