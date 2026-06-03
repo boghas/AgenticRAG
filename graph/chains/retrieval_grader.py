@@ -1,4 +1,5 @@
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnableSerializable
 from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 
@@ -27,4 +28,4 @@ grade_prompt = ChatPromptTemplate.from_messages(
     ],
 )
 
-retrieval_grader = grade_prompt | structured_llm_grader
+retrieval_grader: RunnableSerializable = grade_prompt | structured_llm_grader
