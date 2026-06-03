@@ -13,7 +13,7 @@ The sources of the documents are:
 
 ![](graph.png)
 
-Built with [LangChain]() and [LangGraph]()
+Built with [LangChain](https://www.langchain.com/) and [LangGraph](https://www.langchain.com/langgraph)
 
 ![](logos/langgraph-logo-light.svg) ![](/logos/langchain-logo-light.svg)
 
