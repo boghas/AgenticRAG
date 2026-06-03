@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
 
-from langgraph.graph import END, StateGraph
+from langgraph.graph import START, END, StateGraph
 
+from graph.chains.router import question_router_chain, RouteQuery
 from graph.chains.answer_grader import answer_grader_chain
 from graph.chains.hallucinations_grader import hallucination_grader
 from graph.consts import RETRIEVE, GENERATE, GRADE_DOCUMENTS, WEBSEARCH
@@ -50,6 +51,19 @@ def grade_generation_grounded_in_documents_and_question(state: GraphState) -> st
     else:
         print("---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS")
         return "not supported"
+    
+
+def route_question(state: GraphState) -> str:
+    print("---ROUTE QUESTION---")
+    question = state["question"]
+    source: RouteQuery = question_router_chain.invoke({"question": question})
+
+    if source.datasource == WEBSEARCH:
+        print("---ROUTE QUESTION TO WEB SEARCH---")
+        return WEBSEARCH
+    
+    print("ROUTE QUESTION TO VECTORSTORE")
+    return RETRIEVE
 
 workflow = StateGraph(GraphState)
 
@@ -58,7 +72,13 @@ workflow.add_node(GRADE_DOCUMENTS, grade_documents)
 workflow.add_node(GENERATE, generate)
 workflow.add_node(WEBSEARCH, web_search)
 
-workflow.set_entry_point(RETRIEVE)
+workflow.set_conditional_entry_point(
+    route_question,
+    path_map={
+        WEBSEARCH: WEBSEARCH,
+        RETRIEVE: RETRIEVE
+    }
+)
 workflow.add_edge(RETRIEVE, GRADE_DOCUMENTS)
 workflow.add_conditional_edges(
     GRADE_DOCUMENTS,
