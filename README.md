@@ -7,11 +7,17 @@ The vectorstore contains documents related to agents, prompt engineering, and ad
 The sources of the documents are:
 
 
-> https://lilianweng.github.io/posts/2023-06-23-agent/
-> https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/
-> https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/
+- https://lilianweng.github.io/posts/2023-06-23-agent/
+- https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/
+- https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/
 
 ![](graph.png)
+
+Built with [LangChain]() and [LangGraph]()
+
+![](logos/langgraph-logo-light.svg) ![](/logos/langchain-logo-light.svg)
+
+
 
 ## Prerequisites
 
@@ -51,7 +57,9 @@ To ingest the documents run the following command: `uv run ingestion.py`
 
 ## How to Run
 
-To run the project run the following command: `uv run main.py` and you can chat with the agent. To stop the interaction press: `CTRL + C`
+To run the project run the following command: `uv run main.py` and you can chat with the agent.
+
+To stop the interaction press: `CTRL + C`
 
 ## Testing the app
 

@@ -7,7 +7,13 @@ from graph.graph import app
 
 def main():
     print("Hello from agenticrag-langgraph!")
-    print(app.invoke(input={"question": "what is agent memory"}))
+    while True:
+        question: str = input("Ask a question: \n")
+        response = app.invoke(input={"question": question})
+        print("---RESPONSE---")
+        print(response["generation"])
+        print("---DOCUMENTS---")
+        print(response["documents"])
 
 
 if __name__ == "__main__":
